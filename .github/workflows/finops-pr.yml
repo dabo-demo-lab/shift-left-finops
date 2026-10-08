@@ -172,6 +172,7 @@ jobs:
         env:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          EXPECTED_ENVS: ${{ needs.scope.outputs.envs }}
         run: |
           python3 tools/finops/render_comment.py input summaries "$BASE_SHA" "$HEAD_SHA" > input.json
           conftest test input.json --policy policies --output json > conftest.json || true

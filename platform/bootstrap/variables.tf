@@ -28,6 +28,18 @@ variable "github_repo" {
   default     = "shift-left-finops"
 }
 
+variable "github_org_id" {
+  description = "ID numérico de la organización. El repo usa el claim `sub` inmutable, que incluye los IDs."
+  type        = number
+  default     = 117472623
+}
+
+variable "github_repo_id" {
+  description = "ID numérico del repo (gh api repos/<org>/<repo> --jq .id)."
+  type        = number
+  default     = 1384829651
+}
+
 variable "state_bucket_name" {
   description = "Bucket de estado existente (creado fuera de Terraform)."
   type        = string

@@ -4,6 +4,8 @@ Subcomandos:
     input  <summaries-dir> <base-sha> <head-sha>
         Escribe en stdout el JSON que evalúan las reglas Rego: archivos
         cambiados, qué claves del perfil cambiaron y la capacidad por entorno.
+        EXPECTED_ENVS (JSON) lista los entornos que debían planificarse; los que
+        no tienen resumen se marcan como plan fallido.
     render <input.json> <summaries-dir> <conftest.json> <head-sha>
         Escribe en stdout el comentario en Markdown.
 
@@ -13,6 +15,7 @@ Formato numérico en español (4.380 · USD 27,09), como en las láminas.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -75,10 +78,13 @@ def build_input(summaries_dir: str, base: str, head: str) -> dict:
     files = subprocess.run(
         ["git", "diff", "--name-only", f"{base}...{head}"], check=True, capture_output=True, text=True
     ).stdout.split()
+    envs = {env: s["capacity"] for env, s in load_summaries(summaries_dir).items()}
+    expected = json.loads(os.environ.get("EXPECTED_ENVS") or "[]")
     return {
         "changed_files": files,
         "profile": profile_change(base, head),
-        "envs": {env: s["capacity"] for env, s in load_summaries(summaries_dir).items()},
+        "envs": envs,
+        "failed_envs": [env for env in ENV_ORDER if env in expected and env not in envs],
     }
 
 
@@ -102,7 +108,16 @@ def render(input_path: str, summaries_dir: str, conftest_path: str, head: str) -
     envs = data["envs"]
     changed = [e for e, c in envs.items() if c["delta_hours"] != 0]
 
+    failed = data.get("failed_envs", [])
+
     lines = [MARKER, "## FinOps · alcance del cambio", ""]
+    if failed:
+        lines += [
+            "> [!WARNING]",
+            f"> No se pudo planificar: **{', '.join(failed)}**. "
+            "El alcance está incompleto; revisa los jobs `Plan` de esta ejecución.",
+            "",
+        ]
     if changed:
         lines.append(
             f"**La capacidad mínima cambia en {len(changed)} de {len(envs)} entornos planificados: "
@@ -129,6 +144,8 @@ def render(input_path: str, summaries_dir: str, conftest_path: str, head: str) -
         tot_after += cap["hours_after"]
         tot_dh += cap["delta_hours"]
         tot_dusd += cap["delta_compute_usd"]
+    for env in failed:
+        lines.append(f"| {env} | plan fallido | — | — | — | — |")
     lines += [
         f"| **Total** | | {fmt_int(tot_before)} → {fmt_int(tot_after)} | **{fmt_signed_int(tot_dh)}** "
         f"| **{fmt_usd(tot_dusd, signed=True)}** | |",

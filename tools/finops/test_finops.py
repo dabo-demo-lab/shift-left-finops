@@ -83,6 +83,16 @@ class RenderTest(unittest.TestCase):
         self.assertIn("4.380 → 13.140", text)
         self.assertIn("No se pudieron evaluar", text)
 
+    def test_render_reports_failed_plans(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            summaries = Path(tmp, "s")
+            summaries.mkdir()
+            input_path = Path(tmp, "input.json")
+            input_path.write_text(json.dumps({"envs": {}, "failed_envs": ["prod", "dev"]}), encoding="utf-8")
+            text = render(str(input_path), str(summaries), str(Path(tmp, "missing.json")), "abcdef123")
+        self.assertIn("No se pudo planificar: **prod, dev**", text)
+        self.assertIn("| prod | plan fallido |", text)
+
 
 if __name__ == "__main__":
     unittest.main()

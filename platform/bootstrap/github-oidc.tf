@@ -5,10 +5,12 @@
 # estado y escritura del archivo de lock. Los `apply` se ejecutan en local.
 
 locals {
-  repo_sub_prefix = "repo:${var.github_org}/${var.github_repo}"
+  # El repo usa el claim `sub` inmutable (use_immutable_subject): incluye los
+  # IDs numéricos, así que renombrar o recrear el repo no hereda el acceso.
+  # Si un job usa `environment:`, el claim termina en `:environment:<nombre>`
+  # y este rol lo rechazará.
+  repo_sub_prefix = "repo:${var.github_org}@${var.github_org_id}/${var.github_repo}@${var.github_repo_id}"
 
-  # Claims `sub` por defecto de GitHub. Si un job usa `environment:`, el claim
-  # pasa a ser `<repo>:environment:<nombre>` y este rol lo rechazará.
   gha_allowed_subs = [
     "${local.repo_sub_prefix}:pull_request",
     "${local.repo_sub_prefix}:ref:refs/heads/main",
