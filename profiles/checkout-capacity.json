@@ -1,7 +1,7 @@
 {
   "description": "Capacidad del ASG de checkout. `shared` aplica a prod, staging y dev; `overrides.<env>` reemplaza claves para un entorno.",
   "shared": {
-    "min_size": 2,
+    "min_size": 6,
     "max_size": 8
   },
   "overrides": {}
