@@ -175,8 +175,9 @@ jobs:
           EXPECTED_ENVS: ${{ needs.scope.outputs.envs }}
         run: |
           python3 tools/finops/render_comment.py input summaries "$BASE_SHA" "$HEAD_SHA" > input.json
-          conftest test input.json --policy policies --output json > conftest.json || true
-          python3 tools/finops/render_comment.py render input.json summaries conftest.json "$HEAD_SHA" > comment.md
+          # No llamar a la salida conftest.*: conftest la leería como su configuración.
+          conftest test input.json --policy policies --output json > rules.json || true
+          python3 tools/finops/render_comment.py render input.json summaries rules.json "$HEAD_SHA" > comment.md
           cat comment.md >> "$GITHUB_STEP_SUMMARY"
 
       # Un solo comentario por PR: se actualiza en cada push.

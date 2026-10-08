@@ -6,7 +6,7 @@ Subcomandos:
         cambiados, qué claves del perfil cambiaron y la capacidad por entorno.
         EXPECTED_ENVS (JSON) lista los entornos que debían planificarse; los que
         no tienen resumen se marcan como plan fallido.
-    render <input.json> <summaries-dir> <conftest.json> <head-sha>
+    render <input.json> <summaries-dir> <rules.json> <head-sha>
         Escribe en stdout el comentario en Markdown.
 
 Formato numérico en español (4.380 · USD 27,09), como en las láminas.
