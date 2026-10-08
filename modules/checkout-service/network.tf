@@ -1,10 +1,7 @@
-data "aws_availability_zones" "available" {
-  state = "available"
-}
-
 locals {
-  name = "${var.service}-${var.env}"
-  azs  = slice(data.aws_availability_zones.available.names, 0, var.az_count)
+  name     = "${var.service}-${var.env}"
+  azs      = var.availability_zones
+  az_count = length(var.availability_zones)
 }
 
 resource "aws_vpc" "this" {
@@ -21,7 +18,7 @@ resource "aws_internet_gateway" "this" {
 }
 
 resource "aws_subnet" "public" {
-  count = var.az_count
+  count = local.az_count
 
   vpc_id            = aws_vpc.this.id
   availability_zone = local.azs[count.index]
@@ -31,7 +28,7 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
-  count = var.az_count
+  count = local.az_count
 
   vpc_id            = aws_vpc.this.id
   availability_zone = local.azs[count.index]
@@ -52,7 +49,7 @@ resource "aws_route" "public_internet" {
 }
 
 resource "aws_route_table_association" "public" {
-  count = var.az_count
+  count = local.az_count
 
   subnet_id      = aws_subnet.public[count.index].id
   route_table_id = aws_route_table.public.id
@@ -78,14 +75,14 @@ resource "aws_nat_gateway" "this" {
 
 # Con un solo NAT, todas las subredes privadas salen por él (y por su AZ).
 resource "aws_route_table" "private" {
-  count = var.az_count
+  count = local.az_count
 
   vpc_id = aws_vpc.this.id
   tags   = { Name = "${local.name}-private-${local.azs[count.index]}" }
 }
 
 resource "aws_route" "private_nat" {
-  count = var.az_count
+  count = local.az_count
 
   route_table_id         = aws_route_table.private[count.index].id
   destination_cidr_block = "0.0.0.0/0"
@@ -93,7 +90,7 @@ resource "aws_route" "private_nat" {
 }
 
 resource "aws_route_table_association" "private" {
-  count = var.az_count
+  count = local.az_count
 
   subnet_id      = aws_subnet.private[count.index].id
   route_table_id = aws_route_table.private[count.index].id

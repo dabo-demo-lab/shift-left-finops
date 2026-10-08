@@ -21,10 +21,11 @@ locals {
 module "checkout" {
   source = "../../modules/checkout-service"
 
-  env               = local.env
-  vpc_cidr          = "10.20.0.0/16"
-  nat_gateway_count = 1
-  db_multi_az       = false
+  env                = local.env
+  availability_zones = ["us-east-2a", "us-east-2b"]
+  vpc_cidr           = "10.20.0.0/16"
+  nat_gateway_count  = 1
+  db_multi_az        = false
 
   db_backup_retention_days = 1
 

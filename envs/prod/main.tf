@@ -21,10 +21,13 @@ locals {
 module "checkout" {
   source = "../../modules/checkout-service"
 
-  env               = local.env
-  vpc_cidr          = "10.10.0.0/16"
-  nat_gateway_count = 2
-  db_multi_az       = true
+  env = local.env
+  # RDS Multi-AZ db.t4g.micro con gp3 no tenía capacidad en us-east-2b
+  # (2026-10-08); AWS pidió us-east-2c como segunda AZ.
+  availability_zones = ["us-east-2a", "us-east-2c"]
+  vpc_cidr           = "10.10.0.0/16"
+  nat_gateway_count  = 2
+  db_multi_az        = true
 
   db_backup_retention_days = 7
 

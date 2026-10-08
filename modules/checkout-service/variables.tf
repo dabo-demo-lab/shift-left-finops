@@ -19,13 +19,12 @@ variable "vpc_cidr" {
   type        = string
 }
 
-variable "az_count" {
-  description = "Zonas de disponibilidad usadas por subredes, ALB y ASG."
-  type        = number
-  default     = 2
+variable "availability_zones" {
+  description = "AZ para subredes, ALB, ASG y RDS. Al menos 2: el ALB y RDS Multi-AZ las exigen."
+  type        = list(string)
 
   validation {
-    condition     = var.az_count >= 2
+    condition     = length(var.availability_zones) >= 2
     error_message = "El ALB y RDS requieren al menos 2 AZ."
   }
 }
@@ -35,8 +34,8 @@ variable "nat_gateway_count" {
   type        = number
 
   validation {
-    condition     = var.nat_gateway_count >= 1 && var.nat_gateway_count <= var.az_count
-    error_message = "nat_gateway_count debe estar entre 1 y az_count."
+    condition     = var.nat_gateway_count >= 1 && var.nat_gateway_count <= length(var.availability_zones)
+    error_message = "nat_gateway_count debe estar entre 1 y el número de AZ."
   }
 }
 
