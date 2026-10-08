@@ -1,0 +1,2 @@
+# Copiar a terraform.tfvars (no versionado) y completar.
+budget_notification_emails = ["alertas@example.com"]

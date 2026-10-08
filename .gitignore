@@ -1,0 +1,34 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfplan
+tfplan*
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+# Valores locales (correos, cuentas). Compartir solo *.tfvars.example
+*.tfvars
+!*.tfvars.example
+
+# Planes y salidas crudas: pueden contener IDs de cuenta y ARNs.
+# Los fixtures sanitizados viven en fixtures/ y sí se versionan.
+plan*.json
+!fixtures/**/plan*.json
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Entorno local
+.env
+.env.*
+.aws/
+.DS_Store
+Thumbs.db
