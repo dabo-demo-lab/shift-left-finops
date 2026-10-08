@@ -3,11 +3,11 @@ provider "aws" {
 
   default_tags {
     tags = {
-      project    = var.project
-      service    = "platform"
-      env        = "shared"
-      owner      = var.owner
-      managed-by = "terraform"
+      Project     = var.project
+      Service     = "platform"
+      Environment = "Shared"
+      Owner       = var.owner
+      ManagedBy   = "terraform"
     }
   }
 }

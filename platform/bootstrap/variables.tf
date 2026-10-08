@@ -5,13 +5,13 @@ variable "region" {
 }
 
 variable "project" {
-  description = "Valor del tag `project` en todos los recursos de la demo."
+  description = "Valor del tag `Project` en todos los recursos de la demo."
   type        = string
   default     = "shift-left-finops"
 }
 
 variable "owner" {
-  description = "Valor del tag `owner`."
+  description = "Valor del tag `Owner`."
   type        = string
   default     = "dabo-demo-lab"
 }

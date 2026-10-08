@@ -25,6 +25,7 @@ resource "aws_db_instance" "this" {
   publicly_accessible    = false
 
   backup_retention_period    = var.db_backup_retention_days
+  copy_tags_to_snapshot      = true
   auto_minor_version_upgrade = true
   apply_immediately          = true
 

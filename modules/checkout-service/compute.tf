@@ -1,10 +1,12 @@
 locals {
   app_port = 8080
 
+  environment_tag = { prod = "Prod", staging = "Stage", dev = "Dev" }[var.env]
+
   instance_tags = merge(var.tags, {
-    Name    = local.name
-    service = var.service
-    env     = var.env
+    Name        = local.name
+    Service     = var.service
+    Environment = local.environment_tag
   })
 }
 
@@ -86,6 +88,8 @@ resource "aws_launch_template" "app" {
     service = var.service
   }))
 
+  tags = local.instance_tags
+
   tag_specifications {
     resource_type = "instance"
     tags          = local.instance_tags
@@ -138,7 +142,7 @@ resource "aws_autoscaling_group" "app" {
     content {
       key                 = tag.key
       value               = tag.value
-      propagate_at_launch = false
+      propagate_at_launch = true
     }
   }
 }

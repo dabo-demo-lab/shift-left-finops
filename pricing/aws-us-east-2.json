@@ -1,0 +1,14 @@
+{
+  "description": "Precios de lista On-Demand de AWS usados para el cómputo del ASG, que Infracost no costea. No incluyen descuentos, Savings Plans ni impuestos.",
+  "source": "AWS Price List API (pricing:GetProducts), región us-east-2",
+  "retrieved": "2026-10-08",
+  "currency": "USD",
+  "hours_per_month": 730,
+  "ec2_hourly": {
+    "t4g.micro": 0.0084
+  },
+  "ebs_gb_month": {
+    "gp3": 0.08
+  },
+  "public_ipv4_hourly": 0.005
+}

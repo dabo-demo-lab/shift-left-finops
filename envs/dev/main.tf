@@ -6,13 +6,15 @@ locals {
   profile  = jsondecode(file("${path.module}/../../profiles/checkout-capacity.json"))
   capacity = merge(local.profile.shared, lookup(local.profile.overrides, local.env, {}))
 
+  # Claves y valores que exige la política de tags de Infracost:
+  # Environment solo admite Prod, Stage o Dev.
   tags = {
-    project    = "shift-left-finops"
-    service    = "checkout"
-    env        = local.env
-    owner      = "dabo-demo-lab"
-    scenario   = var.scenario
-    managed-by = "terraform"
+    Project     = "shift-left-finops"
+    Service     = "checkout"
+    Environment = "Dev"
+    Owner       = "dabo-demo-lab"
+    Scenario    = var.scenario
+    ManagedBy   = "terraform"
   }
 }
 
@@ -32,7 +34,7 @@ module "checkout" {
   # Sin `scenario`: cambiarlo crearía otra versión del launch template y un
   # instance refresh en medio de la medición.
   tags = {
-    project = local.tags.project
-    owner   = local.tags.owner
+    Project = local.tags.Project
+    Owner   = local.tags.Owner
   }
 }

@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" font-family="Arial, 'Liberation Sans', Arimo, sans-serif">
+  <title>Progreso de la demo multi-entorno</title>
+  <rect width="1600" height="1000" fill="#FFFFFF"/>
+
+  <!-- Encabezado -->
+  <text x="64" y="64" font-size="18" font-weight="700" fill="#007A8A" letter-spacing="0.7">DEMO MULTI-ENTORNO · PASO A PASO</text>
+  <text x="64" y="112" font-size="40" font-weight="700" fill="#25252B">Infraestructura lista para el primer <tspan fill="#007A8A">apply</tspan></text>
+  <text x="64" y="148" font-size="20" fill="#5C6570">Cuenta AWS us-east-2 · repo dabo-demo-lab/shift-left-finops · actualizado 2026-10-08</text>
+
+  <!-- Pasos -->
+  <g font-size="20">
+    <!-- 1 -->
+    <g transform="translate(64,190)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#247655" stroke-width="3"/>
+      <circle cx="20" cy="20" r="20" fill="#247655"/>
+      <text x="20" y="27" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">✓</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">1 · Cuenta y guardrails</text>
+      <text x="56" y="44" fill="#5C6570">Presupuesto USD 25 con alertas · rol OIDC solo PR y main · state con TLS</text>
+    </g>
+    <!-- 2 -->
+    <g transform="translate(64,270)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#247655" stroke-width="3"/>
+      <circle cx="20" cy="20" r="20" fill="#247655"/>
+      <text x="20" y="27" font-weight="700" fill="#FFFFFF" text-anchor="middle">✓</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">2 · Código base</text>
+      <text x="56" y="44" fill="#5C6570">Módulo checkout-service · envs prod, staging, dev · perfil compartido</text>
+    </g>
+    <!-- 3 -->
+    <g transform="translate(64,350)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#247655" stroke-width="3"/>
+      <circle cx="20" cy="20" r="20" fill="#247655"/>
+      <text x="20" y="27" font-weight="700" fill="#FFFFFF" text-anchor="middle">✓</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">3 · Estimación antes de crear</text>
+      <text x="56" y="44" fill="#5C6570">terraform plan → Infracost (fijo) + script propio (cómputo del ASG)</text>
+    </g>
+    <!-- 4 -->
+    <g transform="translate(64,430)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#39C2D7" stroke-width="3"/>
+      <circle cx="20" cy="20" r="20" fill="#247655"/>
+      <text x="20" y="27" font-weight="700" fill="#FFFFFF" text-anchor="middle">✓</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">4 · Correcciones de Infracost</text>
+      <text x="56" y="44" fill="#5C6570">Tags Service/Environment: 31 → 1 recurso · copia de tags a snapshots</text>
+    </g>
+    <!-- 5 -->
+    <g transform="translate(64,510)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#D8DEE4" stroke-width="3"/>
+      <circle cx="20" cy="20" r="18" fill="#E8F7FA" stroke="#39C2D7" stroke-width="4"/>
+      <text x="20" y="27" font-weight="700" fill="#007A8A" text-anchor="middle">5</text>
+      <text x="56" y="18" font-weight="700" fill="#007A8A" font-size="22">5 · Apply main 2/2/2 · siguiente</text>
+      <text x="56" y="44" fill="#5C6570">116 recursos · ≈ USD 0,43/h · requiere aprobación</text>
+    </g>
+    <!-- 6 -->
+    <g transform="translate(64,590)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#D8DEE4" stroke-width="3"/>
+      <circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#D8DEE4" stroke-width="3"/>
+      <text x="20" y="27" fill="#5C6570" text-anchor="middle">6</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">6 · Alternativa 6/2/2</text>
+      <text x="56" y="44" fill="#5C6570">overrides.prod.min_size = 6 · apply y medición</text>
+    </g>
+    <!-- 7 -->
+    <g transform="translate(64,670)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#D8DEE4" stroke-width="3"/>
+      <circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#D8DEE4" stroke-width="3"/>
+      <text x="20" y="27" fill="#5C6570" text-anchor="middle">7</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">7 · PR perfil compartido 6/6/6</text>
+      <text x="56" y="44" fill="#5C6570">Solo plan y comentario; no se aplica</text>
+    </g>
+    <!-- 8 -->
+    <g transform="translate(64,750)">
+      <line x1="20" y1="40" x2="20" y2="80" stroke="#D8DEE4" stroke-width="3"/>
+      <circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#D8DEE4" stroke-width="3"/>
+      <text x="20" y="27" fill="#5C6570" text-anchor="middle">8</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">8 · Workflow de GitHub Actions</text>
+      <text x="56" y="44" fill="#5C6570">Plan por entorno · Infracost · reglas · un comentario</text>
+    </g>
+    <!-- 9 -->
+    <g transform="translate(64,830)">
+      <circle cx="20" cy="20" r="18" fill="#FFFFFF" stroke="#D8DEE4" stroke-width="3"/>
+      <text x="20" y="27" fill="#5C6570" text-anchor="middle">9</text>
+      <text x="56" y="18" font-weight="700" fill="#25252B" font-size="22">9 · Medición y destroy</text>
+      <text x="56" y="44" fill="#5C6570">Horas del ASG · Cost Explorer por entorno · nada encendido</text>
+    </g>
+  </g>
+
+  <!-- Panel de cifras -->
+  <rect x="900" y="190" width="636" height="690" rx="16" fill="#F3F5F7"/>
+  <text x="936" y="236" font-size="18" font-weight="700" fill="#007A8A" letter-spacing="0.7">ESTIMACIÓN A PRECIO DE LISTA</text>
+  <text x="936" y="272" font-size="24" font-weight="700" fill="#25252B">Horas-instancia mínimas al mes</text>
+
+  <g font-size="20">
+    <text x="936" y="320" fill="#5C6570">Escenario</text>
+    <text x="1250" y="320" fill="#5C6570" text-anchor="end">prod/stg/dev</text>
+    <text x="1380" y="320" fill="#5C6570" text-anchor="end">Horas</text>
+    <text x="1500" y="320" fill="#5C6570" text-anchor="end">Cómputo</text>
+    <line x1="936" y1="334" x2="1500" y2="334" stroke="#D8DEE4" stroke-width="2"/>
+
+    <text x="936" y="372" fill="#25252B">main</text>
+    <text x="1250" y="372" fill="#25252B" text-anchor="end">2 / 2 / 2</text>
+    <text x="1380" y="372" fill="#25252B" text-anchor="end">4.380</text>
+    <text x="1500" y="372" fill="#25252B" text-anchor="end">USD 41</text>
+
+    <text x="936" y="414" fill="#B33E49" font-weight="700">✗ PR perfil compartido</text>
+    <text x="1250" y="414" fill="#25252B" text-anchor="end">6 / 6 / 6</text>
+    <text x="1380" y="414" fill="#25252B" text-anchor="end" font-weight="700">13.140</text>
+    <text x="1500" y="414" fill="#25252B" text-anchor="end">USD 122</text>
+
+    <text x="936" y="456" fill="#247655" font-weight="700">✓ Alternativa</text>
+    <text x="1250" y="456" fill="#25252B" text-anchor="end">6 / 2 / 2</text>
+    <text x="1380" y="456" fill="#25252B" text-anchor="end" font-weight="700">7.300</text>
+    <text x="1500" y="456" fill="#25252B" text-anchor="end">USD 68</text>
+    <line x1="936" y1="476" x2="1500" y2="476" stroke="#D8DEE4" stroke-width="2"/>
+  </g>
+
+  <text x="936" y="530" font-size="24" font-weight="700" fill="#25252B">Infraestructura fija (Infracost)</text>
+  <g font-size="20" fill="#25252B">
+    <text x="936" y="572">prod · 2 NAT, ALB, RDS Multi-AZ</text>
+    <text x="1500" y="572" text-anchor="end">USD 117</text>
+    <text x="936" y="610">staging · 1 NAT, ALB, RDS</text>
+    <text x="1500" y="610" text-anchor="end">USD 67</text>
+    <text x="936" y="648">dev · 1 NAT, ALB, RDS</text>
+    <text x="1500" y="648" text-anchor="end">USD 67</text>
+    <text x="936" y="686">IPv4 públicas de los ALB</text>
+    <text x="1500" y="686" text-anchor="end">USD 22</text>
+  </g>
+  <line x1="936" y1="708" x2="1500" y2="708" stroke="#D8DEE4" stroke-width="2"/>
+
+  <rect x="936" y="730" width="6" height="104" fill="#39C2D7"/>
+  <text x="962" y="764" font-size="24" font-weight="700" fill="#25252B">Sesión de ~3 h: USD 1,5–2</text>
+  <text x="962" y="796" font-size="20" fill="#5C6570">main ≈ USD 0,43/h · alternativa ≈ USD 0,47/h</text>
+  <text x="962" y="824" font-size="20" fill="#5C6570">Mensual equivalente: USD 314 · 395 · 341</text>
+
+  <!-- Fuente y pie -->
+  <text x="64" y="930" font-size="18" fill="#5C6570">Fuente: terraform plan; Infracost 2.17 (infraestructura fija); AWS Price List API 2026-10-08 (t4g.micro USD 0,0084/h, gp3, IPv4). 730 h/mes.</text>
+  <text x="64" y="956" font-size="18" fill="#5C6570">Precios de lista on-demand: no son factura, descuentos ni ahorro realizado. Cómputo = min_size × 730 h; el autoscaling puede sumar horas.</text>
+</svg>

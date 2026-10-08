@@ -9,7 +9,7 @@ variable "env" {
 }
 
 variable "service" {
-  description = "Nombre del servicio; prefijo de recursos y valor del tag `service`."
+  description = "Nombre del servicio; prefijo de recursos y valor del tag `Service`."
   type        = string
   default     = "checkout"
 }
