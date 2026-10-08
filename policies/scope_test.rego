@@ -2,7 +2,12 @@ package main
 
 import rego.v1
 
-cap(before, after) := {"min_before": before, "min_after": after, "delta_hours": (after - before) * 730}
+cap(before, after) := {
+	"min_before": before,
+	"min_after": after,
+	"delta_hours": (after - before) * 730,
+	"delta_hours_label": "2.920",
+}
 
 shared_pr := {
 	"profile": {"shared_changed_keys": ["min_size"], "override_envs_changed": []},
@@ -19,6 +24,8 @@ test_shared_change_warns_scope_and_each_nonprod if {
 	count(msgs) == 3
 	some m in msgs
 	contains(m, "sube en 3 entornos (dev, prod, staging)")
+	some n in msgs
+	contains(n, "staging hereda un mínimo de 6 instancias (antes 2): +2.920 h/mes")
 }
 
 test_prod_override_has_no_warnings if {

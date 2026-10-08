@@ -29,7 +29,7 @@ warn contains msg if {
 	cap.delta_hours > 0
 	not env in input.profile.override_envs_changed
 	msg := sprintf(
-		"%s hereda un mínimo de %d instancias (antes %v): +%d h/mes sin override propio. Confirma si necesita paridad de capacidad permanente.",
-		[env, cap.min_after, cap.min_before, cap.delta_hours],
+		"%s hereda un mínimo de %d instancias (antes %v): +%s h/mes sin override propio. Confirma si necesita paridad de capacidad permanente.",
+		[env, cap.min_after, cap.min_before, cap.delta_hours_label],
 	)
 }

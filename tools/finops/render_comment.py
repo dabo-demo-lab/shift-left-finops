@@ -79,6 +79,9 @@ def build_input(summaries_dir: str, base: str, head: str) -> dict:
         ["git", "diff", "--name-only", f"{base}...{head}"], check=True, capture_output=True, text=True
     ).stdout.split()
     envs = {env: s["capacity"] for env, s in load_summaries(summaries_dir).items()}
+    for cap in envs.values():
+        # Rego no formatea miles: las reglas reciben la cifra ya escrita en español.
+        cap["delta_hours_label"] = fmt_int(cap["delta_hours"])
     expected = json.loads(os.environ.get("EXPECTED_ENVS") or "[]")
     return {
         "changed_files": files,
